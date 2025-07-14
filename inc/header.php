@@ -6,6 +6,7 @@
         <title>Employees DB - Départements</title>
         <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
         <script src="../assets/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="../assets/css/style.css">
         
         <style>
             body {
@@ -102,6 +103,9 @@
                     <a class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'filtre.php' ? 'active' : '' ?>" href="filtre.php">Filtre</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'rajouter-objet.php' ? 'active' : '' ?>" href="rajouter-objet.php">Rajouter Objet</a>
+                </li>
+                 <li class="nav-item">
                     <a class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'deconnexion.php' ? 'active' : '' ?>" href="login.php">Deconnexion</a>
                 </li>
                 </ul>

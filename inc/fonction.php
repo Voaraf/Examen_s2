@@ -152,3 +152,10 @@ header("Location: ../pages/liste.php?success=Objet ajouté avec succès");
 exit;
 
 }
+
+function objet_byId($id_objet) {
+    $sql = "SELECT * FROM Emprunt_view_info_objet WHERE id_objet = '%s'";
+    $sql = sprintf($sql, $id_objet);
+    $result = mysqli_query(bdconnect(), $sql);
+    return mysqli_fetch_assoc($result);
+}
