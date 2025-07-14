@@ -21,7 +21,8 @@
                 <tr>
                     <?php foreach ($objet_info as $objet) { ?>
                         <tr>
-                            <td><?php echo htmlspecialchars($objet['nom_objet']); ?></td>
+            
+                            <td> <a href="fiche.php?ind=<?= $objet['id_objet']; ?>"><?php echo htmlspecialchars($objet['nom_objet']); ?></a></td>
                             <td><?php echo htmlspecialchars($objet['nom_categorie']); ?></td>
                             <td><?php echo htmlspecialchars($objet['date_emprunt']); ?></td>
                             <td><?php echo htmlspecialchars($objet['date_retour']); ?></td>
