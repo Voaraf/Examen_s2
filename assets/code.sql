@@ -41,3 +41,19 @@ SELECT
     m.ville,
     m.image_profil
 FROM Emprunt_membre m;   
+
+CREATE OR REPLACE VIEW Emprunt_view_info_emprunt AS
+SELECT
+    e.id_membre,
+    o.nom_objet,
+    m.nom AS nom_membre,
+    e.date_emprunt,
+    e.date_retour
+FROM Emprunt_emprunt e
+JOIN Emprunt_objet o ON e.id_objet = o.id_objet
+JOIN Emprunt_membre m ON e.id_membre = m.id_membre
+ORDER BY e.date_emprunt DESC;
+
+ALTER TABLE Emprunt_emprunt
+ADD COlUMN statut_etat ENUM('OK', 'Abimé') DEFAULT NULL;
+

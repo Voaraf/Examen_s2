@@ -188,3 +188,33 @@ function emprunter_objet($id_objet, $nbjour) {
     }
 }
 
+function emprunt_byId($id_membre) {
+    $connexion = bdconnect();
+    $id_membre = intval($id_membre);
+
+    $sql = "SELECT * FROM Emprunt_view_info_emprunt WHERE id_membre = $id_membre";
+    $result = mysqli_query($connexion, $sql);
+
+    if (!$result) {
+        die("Erreur SQL : " . mysqli_error($connexion));
+    }
+
+    $emprunts = [];
+    while ($ligne = mysqli_fetch_assoc($result)) {
+        $emprunts[] = $ligne;
+    }
+
+    return $emprunts;
+}
+
+function retourner_objet($id_emprunt, $etat) {
+    $id_membre = $_SESSION['id_membre'];
+    $sql = "UPDATE Emprunt_emprunt SET statut_etat = '%s' WHERE id_objet = '%s' AND id_membre = '%s'";
+    $sql = sprintf($sql, $etat, $id_emprunt, $id_membre);
+
+    if (mysqli_query(bdconnect(), $sql)) {
+        header("Location: ../pages/fiche-membre.php?success=Retour enregistré");
+    } else {
+        header("Location: ../pages/fiche-membre.php?error=Échec du retour");
+    }
+}
