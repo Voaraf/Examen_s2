@@ -2,11 +2,56 @@
 require("connexion.php");
 session_start();
 
-function inscrire($image, $name, $date, $genre, $ville, $email, $password) {
-    $sql = "INSERT INTO Emprunt_membre (nom, date_naissance, genre, mail, ville, mdp, image_profil) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')";
-    $sql = sprintf($sql, $name, $date, $genre, $email, $ville, $password, $image);
-    mysqli_query(bdconnect(), $sql);
+function inscrire($image, $nom, $dateNaissance, $genre, $ville, $email, $password) {
+    $uploadDir = __DIR__ . '/../uploads/';
+    $maxSize = 2 * 1024 * 1024;
+    $allowedMime = ['image/jpeg', 'image/png'];
+
+    if ($image['error'] !== UPLOAD_ERR_OK) {
+        die('Erreur lors de l’upload : ' . $image['error']);
+    }
+
+    if ($image['size'] > $maxSize) {
+        die('Le fichier image est trop volumineux.');
+    }
+
+    $mime = mime_content_type($image['tmp_name']);
+    if (!in_array($mime, $allowedMime)) {
+        die('Type de fichier non autorisé : ' . $mime);
+    }
+
+    $ext = pathinfo($image['name'], PATHINFO_EXTENSION);
+    $newName = pathinfo($image['name'], PATHINFO_FILENAME) . '_' . uniqid() . '.' . $ext;
+
+    if (!move_uploaded_file($image['tmp_name'], $uploadDir . $newName)) {
+        die('Échec du déplacement de l’image.');
+    }
+
+    $sql_insert = "INSERT INTO Emprunt_membre
+        (nom, date_naissance, genre, mail, ville, mdp, image_profil)
+        VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')";
+
+    $conn = bdconnect();
+    $sql = sprintf(
+        $sql_insert,
+        mysqli_real_escape_string($conn, $nom),
+        mysqli_real_escape_string($conn, $dateNaissance),
+        mysqli_real_escape_string($conn, $genre),
+        mysqli_real_escape_string($conn, $email),
+        mysqli_real_escape_string($conn, $ville),
+        mysqli_real_escape_string($conn, $password),
+        mysqli_real_escape_string($conn, $newName)
+    );
+
+    $result = mysqli_query($conn, $sql);
+    if ($result) {
+        header("Location: ../pages/liste.php?success=Registration successful");
+    } else {
+        header("Location: ../pages/index.php?error=Insertion échouée");
+    }
 }
+
+
 function verifier($email, $password) {
     $sql = "SELECT * FROM Emprunt_membre WHERE mail = '%s' AND mdp = '%s'";
     $sql = sprintf($sql, $email, $password);

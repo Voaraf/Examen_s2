@@ -8,5 +8,5 @@ require("../inc/fonction.php");
 
     if ($action === 'login') {
         verifier($email, $password);
-        header("Location: ../pages/liste.php?success=Login successful");
+     exit;
     }

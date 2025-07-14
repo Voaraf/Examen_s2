@@ -3,7 +3,7 @@ require("../inc/fonction.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'] ?? '';
-    $image = $_FILES['image']['name'];
+    $image = $_FILES['image'];
     $name = $_POST['name'];
     $date = $_POST['date'];
     $genre = $_POST['genre'];
@@ -12,6 +12,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
 
     inscrire($image, $name, $date, $genre, $ville, $email, $password);
-    header("Location: ../pages/liste.php?success=Registration successful");
-
+    exit;
 }
