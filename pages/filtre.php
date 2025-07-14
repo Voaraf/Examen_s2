@@ -13,7 +13,7 @@ if ($filtre !== null) {
 ?>
 
 <main>
-    <section>
+    <section class = "container">
         <form action="filtre.php" method="POST">
             <label for="categorie"><strong>Catégorie</strong></label>
             <select name="filtre" id="categorie">
