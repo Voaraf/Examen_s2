@@ -1,23 +1,25 @@
-(ok) Creer github 
+(OK) Creer github 
 Version 1
+(OK)index.php:
+    (OK)redirection vers pages/index.php
 assets 
-    base.sql
-        Creer la base de donnee
-            emprunt_membre (id_membre, nom, date_de_naissance, genre, mail,ville, mdp, image_profil)
-            emprunt_categorie_objet (id_categorie, nom_categorie )
-            emprunt_objet (id_objet , nom_objet , id_categorie, id_membre)
-            emprunt_images_objet(id_image, id_objet, nom_image)
-            emprunt_emprunt(id_emprunt, id_objet, id_membre, date_emprunt, date_retour)
-        Inserer les donnee de test
-            4  membres
-            4 catégories ( esthétique, bricolage, mécanique , cuisine )
-            10 objets par membre à répartir sur les catégories
-            10 emprunts
+    (OK)base.sql
+        (OK)Creer la base de donnee
+            (OK)Emprunt_membre (id_membre, nom, date_de_naissance, genre, mail,ville, mdp, image_profil)
+            (OK)Emprunt_categorie_objet (id_categorie, nom_categorie )
+            (OK)Emprunt_objet (id_objet , nom_objet , id_categorie, id_membre)
+            (OK)Emprunt_images_objet(id_image, id_objet, nom_image)
+            (OK)Emprunt_emprunt(id_emprunt, id_objet, id_membre, date_emprunt, date_retour)
+        (OK)Inserer les donnee de test
+            (OK)4  membres
+            (OK)4 catégories ( esthétique, bricolage, mécanique , cuisine )
+            (OK)10 objets par membre à répartir sur les catégories
+            (OK)10 emprunts
     code.sql
         Creer des views : 
-            emprunt_view_info_objet
-            emprunt_view_info_user
-            emprunt_view_categorie_byid 
+            Emprunt_view_info_user
+            Emprunt_view_categorie_byid 
+            Emprunt_view_info_objet
 
 pages
     index.php pour s inscrire
@@ -45,14 +47,16 @@ pages
             filtrer_categorie
    
 inc 
-    connexion.php:
+    (OK)connexion.php:
         bdconnect to connect
     fonction.php : 
          inserer_donnee
          verifier_user
          info_objet
          filtrer_categorie
-
+    header.php:
+        navbar pour lien des page dans le code  
+        
 
 
  
