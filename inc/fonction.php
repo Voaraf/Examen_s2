@@ -25,3 +25,35 @@ function getUserInfo($id_membre) {
     $result = mysqli_query(bdconnect(), $sql);
     return mysqli_fetch_assoc($result);
 }
+
+function info_objet() {
+    $sql = "SELECT * FROM Emprunt_view_info_objet";
+    $result = mysqli_query(bdconnect(), $sql);
+    $objets = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $objets[] = $row;
+    }
+    return $objets;
+
+}
+
+function get_categorie() {
+    $sql = "SELECT * FROM Emprunt_categorie_objet";
+    $result = mysqli_query(bdconnect(), $sql);
+    $categories = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $categories[] = $row;
+    }
+    return $categories;
+}
+
+function filtrer_categorie($id_categorie) {
+    $sql = "SELECT * FROM Emprunt_view_categorie WHERE id_categorie = '%s'";
+    $sql = sprintf($sql, $id_categorie);
+    $result = mysqli_query(bdconnect(), $sql);
+    $objets = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $objets[] = $row;
+    }
+    return $objets;
+}

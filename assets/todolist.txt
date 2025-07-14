@@ -17,9 +17,8 @@ assets
             (OK)10 emprunts
     code.sql
         Creer des views : 
-            Emprunt_view_info_user
-            Emprunt_view_categorie_byid 
             Emprunt_view_info_objet
+            Emprunt_view_categorie 
 
 pages
     index.php pour s inscrire
