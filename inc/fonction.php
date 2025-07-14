@@ -166,3 +166,25 @@ function membre_byId($id_membre) {
     $result = mysqli_query(bdconnect(), $sql);
     return mysqli_fetch_assoc($result);
 }
+
+function calculer_date_emprunt($nbjour) {
+    $date_actuelle = new DateTime();
+    $date_actuelle->modify("+$nbjour days");
+    return $date_actuelle->format('Y-m-d'); 
+
+}
+function emprunter_objet($id_objet, $nbjour) {
+    $date_retour = calculer_date_emprunt($nbjour);
+    $id_membre = $_SESSION['id_membre'];
+
+    $sql_emprunt = "INSERT INTO Emprunt_emprunt(id_objet, id_membre, date_emprunt, date_retour)
+                    VALUES ('%s', '%s', CURDATE(), '%s')";
+    $sql = sprintf($sql_emprunt, $id_objet, $id_membre, $date_retour);
+
+    if (mysqli_query(bdconnect(), $sql)) {
+        header("Location: ../pages/liste.php?success=Emprunt réussi");
+    } else {
+        header("Location: ../pages/liste.php?error=Échec de l'emprunt");
+    }
+}
+

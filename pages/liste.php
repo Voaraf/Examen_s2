@@ -14,6 +14,7 @@
                     <th>Catégorie</th>
                     <th>Date d'emprunt</th>
                     <th>Date de retour</th>
+                    <th></th>
                     
                 </tr>
             </thead>
@@ -26,6 +27,7 @@
                             <td><?php echo htmlspecialchars($objet['nom_categorie']); ?></td>
                             <td><?php echo htmlspecialchars($objet['date_emprunt']); ?></td>
                             <td><?php echo htmlspecialchars($objet['date_retour']); ?></td>
+                            <td><a href="champ.php?objet= <?= $objet['id_objet']; ?> ">Emprunter</a></td>
                         </tr>
                     <?php } ?>
                 </tr>
