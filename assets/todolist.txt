@@ -27,11 +27,16 @@ pages
             input (nom, date_de_naissance, genre, mail,ville, mdp, image_profil)
         fonction : 
             inserer_donnee
+        traitement-inscription.php
+            appel inserer donnee 
+                true vers liste
+                false vers index
     login.php
         html :
             input (nom, mdp)
         fonction :
             verifier_user
+            getUserInfo
 
     liste.php 
         html :
@@ -45,6 +50,7 @@ pages
             liste des catégorie
         fonction : 
             filtrer_categorie
+    
    
 inc 
     (OK)connexion.php:
