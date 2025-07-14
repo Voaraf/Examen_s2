@@ -102,3 +102,53 @@ function filtrer_categorie($id_categorie) {
     }
     return $objets;
 }
+function rajouter_objet($name, $categorie, $image)
+{
+    $uploadDir = __DIR__ . '/../uploads/';
+@mkdir($uploadDir, 0755, true);
+
+$maxSize = 2 * 1024 * 1024;
+$allowedMime = ['image/jpeg', 'image/png'];
+
+$conn = bdconnect();
+mysqli_set_charset($conn, 'utf8');
+
+$nom = mysqli_real_escape_string($conn, $name);
+$cat = (int)$categorie;
+$idMembre = (int)$_SESSION['id_membre'];
+
+$sql_obj = "INSERT INTO Emprunt_objet (nom_objet, id_categorie, id_membre)
+            VALUES ('$nom', $cat, $idMembre)";
+if (!mysqli_query($conn, $sql_obj)) {
+    header("Location: ../pages/rajouter-objet.php?error=Erreur base");
+    exit;
+}
+$idObjet = mysqli_insert_id($conn);
+
+$nbFichiers = count($image['name']);
+
+for ($i = 0; $i < $nbFichiers; $i++) {
+    if ($image['error'][$i] === UPLOAD_ERR_OK) {
+        $tmp = $image['tmp_name'][$i];
+        $mime = mime_content_type($tmp);
+        if (!in_array($mime, $allowedMime)) continue;
+
+        if ($image['size'][$i] > $maxSize) continue;
+
+        $ext = pathinfo($image['name'][$i], PATHINFO_EXTENSION);
+        $base = pathinfo($image['name'][$i], PATHINFO_FILENAME);
+        $newName = $base . '_' . uniqid() . '.' . strtolower($ext);
+
+        if (move_uploaded_file($tmp, $uploadDir . $newName)) {
+            $fileNameSql = mysqli_real_escape_string($conn, $newName);
+            mysqli_query($conn,
+                "INSERT INTO Emprunt_images_objet (id_objet, nom_image)
+                 VALUES ($idObjet, '$fileNameSql')"
+            );
+        }
+    }
+}
+header("Location: ../pages/liste.php?success=Objet ajouté avec succès");
+exit;
+
+}

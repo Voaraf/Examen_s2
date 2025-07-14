@@ -45,7 +45,6 @@ if ($filtre !== null) {
     ?>
 </strong></h1>
 
-
         <?php if (is_array($objet_info) && count($objet_info) > 0) { ?>
             <ul>
                 <?php for ($j = 0; $j < count($objet_info); $j++) { ?>

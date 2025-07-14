@@ -43,6 +43,8 @@ CREATE TABLE Emprunt_emprunt (
     FOREIGN KEY (id_membre) REFERENCES Emprunt_membre(id_membre) 
 );
 
+
+
 --donnee de test:
 INSERT INTO Emprunt_membre (nom, date_naissance, genre, mail, ville, mdp, image_profil) VALUES
 ('Bob Martin', '1985-05-15', 'Homme', 'bob@gmail.com', 'Lyon','bob123', 'bob.jpg'),
