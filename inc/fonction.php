@@ -159,3 +159,10 @@ function objet_byId($id_objet) {
     $result = mysqli_query(bdconnect(), $sql);
     return mysqli_fetch_assoc($result);
 }
+
+function membre_byId($id_membre) {
+    $sql = "SELECT * FROM Emprunt_view_info_user WHERE id_membre = '%s'";
+    $sql = sprintf($sql, $id_membre);
+    $result = mysqli_query(bdconnect(), $sql);
+    return mysqli_fetch_assoc($result);
+}

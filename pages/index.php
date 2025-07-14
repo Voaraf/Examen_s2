@@ -1,3 +1,9 @@
+<?php
+    require_once("../inc/fonction.php");
+
+    session_destroy();
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>

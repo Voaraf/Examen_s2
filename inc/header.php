@@ -105,6 +105,9 @@
                 <li class="nav-item">
                     <a class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'rajouter-objet.php' ? 'active' : '' ?>" href="rajouter-objet.php">Rajouter Objet</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'fiche-membre.php' ? 'active' : '' ?>" href="fiche-membre.php">MOI</a>
+                </li>
                  <li class="nav-item">
                     <a class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'deconnexion.php' ? 'active' : '' ?>" href="login.php">Deconnexion</a>
                 </li>

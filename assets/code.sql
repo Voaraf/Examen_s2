@@ -30,3 +30,14 @@ FROM Emprunt_objet AS o
 JOIN Emprunt_categorie_objet AS c
   ON o.id_categorie = c.id_categorie
 ORDER BY c.nom_categorie, o.nom_objet;
+
+CREATE OR REPLACE VIEW Emprunt_view_info_user AS
+SELECT
+    m.id_membre,
+    m.nom,
+    m.date_naissance,
+    m.mail,
+    m.genre,
+    m.ville,
+    m.image_profil
+FROM Emprunt_membre m;   
